@@ -1,0 +1,171 @@
+/* --- CONFIGURATION & VARIABLES --- */
+:root {
+    --bg-light: #f8fafc;
+    --bg-gradient-top: #e2e8f0;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(148, 163, 184, 0.2);
+
+    /* Professional Accent: Steel Cobalt */
+    --accent-primary: #2563eb;
+    --accent-soft: rgba(37, 99, 235, 0.1);
+
+    /* Tooltip & Typography */
+    --tip-bg: #1e293b;
+    --text-main: #334155;
+    --text-header: #0f172a;
+    --text-muted: #94a3b8;
+}
+
+/* --- CORE LAYOUT --- */
+body {
+    background: linear-gradient(180deg, var(--bg-gradient-top) 0%, var(--bg-light) 100%) !important;
+    min-height: 100vh;
+    color: var(--text-main);
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+/* --- TYPOGRAPHY --- */
+h1 {
+    font-size: 2.8rem !important;
+    line-height: 1 !important;
+    font-weight: 950 !important;
+    font-style: italic;
+    color: var(--text-header);
+    letter-spacing: -0.07em !important;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+    display: flex;
+    align-items: baseline;
+}
+
+h1 span.dot {
+    color: var(--accent-primary);
+    font-style: normal;
+    margin-left: 0.05em;
+}
+
+h3 {
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    color: #64748b !important;
+    letter-spacing: 0.15em !important;
+}
+
+.mono {
+    font-family: ui-monospace, SFMono-Regular, "Cascadia Code", "Source Code Pro", monospace;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+/* --- UI COMPONENTS --- */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+}
+
+.mode-badge {
+    padding: 4px 14px;
+    border-radius: 50px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    color: var(--accent-primary);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+/* --- NAVIGATION & TABS --- */
+input[type="radio"].tab-logic { display: none; }
+.tab-content { display: none; }
+
+#tab1:checked ~ .content1,
+#tab2:checked ~ .content2,
+#tab3:checked ~ .content3 {
+    display: block !important;
+}
+
+.nav-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tab-label {
+    padding: 14px 28px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.tab-label:hover {
+    color: #64748b;
+}
+
+#tab1:checked ~ .nav-container .l1,
+#tab2:checked ~ .nav-container .l2,
+#tab3:checked ~ .nav-container .l3 {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+}
+
+/* --- INTERACTIVE TOOLTIPS --- */
+.info-tip {
+    position: relative;
+    cursor: help;
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.info-tip:hover { color: var(--accent-primary); }
+
+.info-tip .tip-text {
+    visibility: hidden;
+    width: 240px;
+    background-color: var(--tip-bg);
+    color: #fff;
+    text-align: left;
+    border-radius: 12px;
+    padding: 12px;
+    position: absolute;
+    z-index: 50;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -120px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.info-tip .tip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--tip-bg) transparent transparent transparent;
+}
+
+.info-tip:hover .tip-text {
+    visibility: visible;
+    opacity: 1;
+}
