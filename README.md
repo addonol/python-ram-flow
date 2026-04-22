@@ -17,10 +17,9 @@ In long-running worker environments (Celery, RQ), these small leaks accumulate u
 
 ## 🚀 Quick Start
 
-
 ### Installation
 ```bash
-pip install ramflow
+pip install python-ram-flow
 ```
 
 ### Integrated Usage
@@ -44,5 +43,5 @@ tracker.generate_report(suffix="nightly_sync")
 ## 📊 Visual Insights
 
 <p align="center">
-  <img src="https://github.com/addonol/python-ram-flow/blob/main/assets/02-timeline-v1.png?raw=true" width="800" alt="RAM-FLOW Dashboard">
+  <img src="https://github.com/addonol/python-ram-flow/blob/main/assets/02-timeline-v1.png?raw=true" width="600" alt="RAM-FLOW Dashboard">
 </p>
