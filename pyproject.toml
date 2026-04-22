@@ -31,8 +31,15 @@ Issues = "https://github.com/addonol/python-ram-flow/issues"
 [tool.hatch.build.targets.wheel]
 packages = ["ramflow"]
 
-[tool.hatch.build.targets.wheel.force-include]
-"ramflow/templates" = "ramflow/templates"
+[tool.hatch.build]
+exclude = [
+    "/examples",
+    "/assets",
+    "/.github",
+    "/.pre-commit-config.yaml",
+    "/SECURITY.md",
+    "uv.lock",
+]
 
 [dependency-groups]
 dev = [
