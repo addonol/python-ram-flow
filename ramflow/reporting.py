@@ -4,14 +4,16 @@ Generates premium, standalone performance dashboards with executive KPIs,
 visual execution timelines, and detailed system metadata.
 """
 
-import os
+import getpass
 import json
-import psutil
+import os
 import platform
 import socket
-import getpass
-from typing import List, Dict, Any
 from datetime import datetime
+from typing import Any
+
+import psutil
+
 from . import config
 from .templates import components
 
@@ -29,7 +31,7 @@ class Reporter:
 
     def __init__(
         self,
-        history: List[Dict[str, Any]],
+        history: list[dict[str, Any]],
         start_mem: float,
         env: str,
         threshold: int,
@@ -50,7 +52,7 @@ class Reporter:
         self.threshold = threshold
         self.django_overhead = django_overhead
 
-    def _analyze_memory_trend(self, residual_leak: float) -> Dict[str, str]:
+    def _analyze_memory_trend(self, residual_leak: float) -> dict[str, str]:
         """Analyzes cumulative memory pressure to detect persistent bloating.
 
         This algorithm evaluates the 'Memory Plateau' effect. If the process
