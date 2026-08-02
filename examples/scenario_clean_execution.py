@@ -28,9 +28,10 @@ is reclaimed, leading to a "SECURE" audit verdict.
    to its baseline. The aircraft is empty and ready for the next flight.
 """
 
-import time
 import logging
-from typing import List, Dict, Any
+import time
+from typing import Any
+
 from ramflow import tracker
 
 # --- LOGGER CONFIGURATION ---
@@ -50,10 +51,10 @@ tracker.env = "PRODUCTION"
 tracker.threshold = 100
 
 # Simulated cache that we WILL clear this time
-SEARCH_CACHE: Dict[str, Any] = {}
+SEARCH_CACHE: dict[str, Any] = {}
 
 
-def simulate_enterprise_infrastructure_load() -> List[bytearray]:
+def simulate_enterprise_infrastructure_load() -> list[bytearray]:
     """Simulates the baseline load of a large enterprise project."""
     infra_bloat = [bytearray(1024 * 1024) for _ in range(400)]
     tracker.log_django_bootstrap()
@@ -61,7 +62,7 @@ def simulate_enterprise_infrastructure_load() -> List[bytearray]:
 
 
 @tracker.track("Oracle: Data Extraction")
-def oracledb_extraction() -> List[bytearray]:
+def oracledb_extraction() -> list[bytearray]:
     """Extracts data and ensures it stays local to the caller."""
     data = [bytearray(1024 * 512) for _ in range(300)]
     time.sleep(1.0)
@@ -69,7 +70,7 @@ def oracledb_extraction() -> List[bytearray]:
 
 
 @tracker.track("Elastic: Optimized Check")
-def elastic_integrity_check(erp_data: List[bytearray]) -> List[str]:
+def elastic_integrity_check(erp_data: list[bytearray]) -> list[str]:
     """Queries ES with proper filtering and temporary caching.
 
     The results are stored globally but will be cleared by the orchestrator.
@@ -85,7 +86,7 @@ def elastic_integrity_check(erp_data: List[bytearray]) -> List[str]:
 
 
 @tracker.track("Faktory: Efficient Dispatch")
-def slow_dispatch(skus: List[str]) -> None:
+def slow_dispatch(skus: list[str]) -> None:
     """Enqueues tasks while other resources are being freed."""
     for i in range(min(len(skus), 10)):
         time.sleep(0.1)

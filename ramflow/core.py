@@ -6,11 +6,13 @@ calculate net self-consumption of functions, and handle framework overhead.
 
 import os
 import time
-import psutil
+from collections.abc import Callable
 from datetime import datetime
 from functools import wraps
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Union
+from typing import Any
+
+import psutil
 
 from .config import HARD_LIMIT, THRESHOLD
 from .utils import force_release, kill_process
@@ -48,7 +50,7 @@ class RamFlow:
         self.django_overhead: float = 0.0
         self.threshold: int = threshold
         self.hard_limit: int = hard_limit_mb
-        self.history: List[Dict[str, Any]] = []
+        self.history: list[dict[str, Any]] = []
 
     @property
     def env(self) -> str:
@@ -76,7 +78,6 @@ class RamFlow:
         This method is kept for API consistency. The actual baseline is
         captured during class initialization.
         """
-        pass
 
     def log_django_bootstrap(self) -> None:
         """Records the memory overhead of the Django framework initialization.
@@ -98,7 +99,7 @@ class RamFlow:
             }
         )
 
-    def track(self, label: Optional[Union[str, Callable]] = None) -> Callable:
+    def track(self, label: str | Callable | None = None) -> Callable:
         """Decorator to monitor the net memory consumption of a function.
 
         Calculates 'Net Self' memory by subtracting the consumption of any
@@ -192,9 +193,7 @@ class RamFlow:
 
         return leak
 
-    def generate_report(
-        self, folder: Optional[str] = None, suffix: str = "audit"
-    ) -> str:
+    def generate_report(self, folder: str | None = None, suffix: str = "audit") -> str:
         """Generates the Premium HTML report with automated smart naming.
 
         Triggers a final release audit, instantiates the reporter, and saves
@@ -207,8 +206,8 @@ class RamFlow:
         Returns:
             str: The absolute path to the generated HTML report.
         """
-        from .reporting import Reporter
         from .config import REPORTS_DIR
+        from .reporting import Reporter
 
         target_dir = Path.cwd() / (folder or REPORTS_DIR)
         target_dir.mkdir(parents=True, exist_ok=True)

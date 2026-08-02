@@ -27,9 +27,10 @@ Web Store in sync with our massive Oracle ERP.
    a massive footprint. On a server running this repeatedly, a crash is inevitable.
 """
 
-import time
 import logging
-from typing import List, Dict, Any
+import time
+from typing import Any
+
 from ramflow import tracker
 
 # --- LOGGER CONFIGURATION ---
@@ -49,10 +50,10 @@ tracker.env = "PRODUCTION"
 tracker.threshold = 100  # Threshold in MB for task highlighting
 
 # Persistent storage simulation (The "Hidden Culprit")
-SEARCH_CACHE: Dict[str, Any] = {}
+SEARCH_CACHE: dict[str, Any] = {}
 
 
-def simulate_enterprise_infrastructure_load() -> List[bytearray]:
+def simulate_enterprise_infrastructure_load() -> list[bytearray]:
     """Simulates a heavy infrastructure load (spaCy, Pandas, Models).
 
     This helper function forces a memory allocation to simulate the resident
@@ -68,7 +69,7 @@ def simulate_enterprise_infrastructure_load() -> List[bytearray]:
 
 
 @tracker.track("Oracle: Data Extraction ERP")
-def oracledb_extraction() -> List[bytearray]:
+def oracledb_extraction() -> list[bytearray]:
     """Simulates pulling heavy product data from a legacy ERP database.
 
     Returns:
@@ -81,7 +82,7 @@ def oracledb_extraction() -> List[bytearray]:
 
 
 @tracker.track("Elastic: Integrity Check")
-def elastic_integrity_check(erp_data: List[bytearray]) -> List[str]:
+def elastic_integrity_check(erp_data: list[bytearray]) -> list[str]:
     """Queries ElasticSearch to validate documents before dispatching.
 
     This function intentionally omits '_source' filtering to simulate
@@ -107,7 +108,7 @@ def elastic_integrity_check(erp_data: List[bytearray]) -> List[str]:
 
 
 @tracker.track("Faktory: Slow Queue Dispatch")
-def slow_dispatch(skus: List[str]) -> None:
+def slow_dispatch(skus: list[str]) -> None:
     """Enqueues tasks one by one to the background worker server.
 
     This slow loop mimics network latency, keeping all previously allocated
