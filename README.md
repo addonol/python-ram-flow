@@ -29,11 +29,13 @@ from ramflow import tracker
 # 1. Capture infrastructure load (Django models, apps, etc.)
 tracker.log_django_bootstrap()
 
+
 @tracker.track("Oracle Data Extraction")
 def process_data():
     # Your heavy logic here
     # RAM-FLOW monitors the 'Net Self' impact of this specific call
     pass
+
 
 # 2. Run and Generate the Platinum Dashboard
 process_data()
